@@ -1,4 +1,4 @@
-package caddy_auth_leierkasten
+package caddy_leierkasten_auth
 
 import (
 	"encoding/json"
