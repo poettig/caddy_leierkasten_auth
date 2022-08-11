@@ -1,6 +1,7 @@
 package caddy_leierkasten_auth
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"github.com/caddyserver/caddy/v2"
@@ -14,6 +15,7 @@ import (
 	"net/url"
 	"regexp"
 	"strings"
+	"time"
 )
 
 func init() {
@@ -109,20 +111,22 @@ func (leierkastenAuth *LeierkastenAuth) Authenticate(_ http.ResponseWriter, requ
 	failureUser := caddyauth.User{}
 
 	// Get leierkasten cookie from request
-	foundCookie := false
-	var authCookie *http.Cookie
+	var authCookie *http.Cookie = nil
 	for _, cookie := range request.Cookies() {
 		if cookie.Name == leierkastenAuth.CookieName {
-			foundCookie = true
 			authCookie = cookie
+			break
 		}
 	}
 
-	if !foundCookie {
+	if authCookie == nil {
 		return failureUser, false, fmt.Errorf("the leierkasten auth cookie was not provided with the request")
 	}
 
-	request, err := http.NewRequest("GET", fmt.Sprintf("%s/me/get", leierkastenAuth.LeierkastenUrl), nil)
+	requestContext, cancel := context.WithTimeout(context.Background(), 10*time.Millisecond)
+	defer cancel()
+
+	request, err := http.NewRequestWithContext(requestContext, "GET", fmt.Sprintf("%s/me/get", leierkastenAuth.LeierkastenUrl), nil)
 	if err != nil {
 		return failureUser, false, fmt.Errorf("failed to construct request to leierkasten auth endpoint: %s", err)
 	}
