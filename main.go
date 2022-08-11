@@ -17,7 +17,7 @@ import (
 )
 
 func init() {
-	caddy.RegisterModule(LeierkastenAuth{})
+	caddy.RegisterModule(&LeierkastenAuth{})
 	httpcaddyfile.RegisterHandlerDirective("leierkastenauth", parseCaddyfile)
 }
 
@@ -35,7 +35,7 @@ type AuthResponse struct {
 }
 
 // CaddyModule returns the Caddy module information.
-func (LeierkastenAuth) CaddyModule() caddy.ModuleInfo {
+func (leierkastenAuth *LeierkastenAuth) CaddyModule() caddy.ModuleInfo {
 	return caddy.ModuleInfo{
 		ID:  "http.authentication.providers.leierkasten",
 		New: func() caddy.Module { return new(LeierkastenAuth) },
@@ -105,7 +105,7 @@ func (leierkastenAuth *LeierkastenAuth) Validate() error {
 	return nil
 }
 
-func (leierkastenAuth *LeierkastenAuth) Authenticate(responseWriter http.ResponseWriter, request *http.Request) (caddyauth.User, bool, error) {
+func (leierkastenAuth *LeierkastenAuth) Authenticate(_ http.ResponseWriter, request *http.Request) (caddyauth.User, bool, error) {
 	failureUser := caddyauth.User{}
 
 	// Get leierkasten cookie from request
