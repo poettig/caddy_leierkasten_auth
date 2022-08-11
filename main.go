@@ -59,7 +59,7 @@ func parseCaddyfile(h httpcaddyfile.Helper) (caddyhttp.MiddlewareHandler, error)
 
 				if strings.HasSuffix(leierkastenAuth.LeierkastenUrl, "/") {
 					// Remove ending slashes in path
-					r := regexp.MustCompile(`.*/+$`)
+					r := regexp.MustCompile(`/+$`)
 					leierkastenAuth.LeierkastenUrl = r.ReplaceAllString(leierkastenAuth.LeierkastenUrl, "")
 				}
 
