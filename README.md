@@ -17,7 +17,7 @@ localhost:12345 {
             cookie_name leierkasten-session
         }
         respond 200 {
-            body "User Authenticated with ID: {http.auth.user.id}. Metadata: DisplayName {http.auth.user.name}, LoginName {http.auth.user.loginName}"
+            body "User authenticated with ID: {http.auth.user.id}. Metadata: DisplayName {http.auth.user.name}, LoginName {http.auth.user.loginName}"
         }
     }
 }
