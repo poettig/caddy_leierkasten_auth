@@ -95,7 +95,7 @@ func (leierkastenAuth *LeierkastenAuth) Validate() error {
 
 	parsedUrl, err := url.ParseRequestURI(leierkastenAuth.LeierkastenUrl)
 	if err != nil {
-		return fmt.Errorf("leierkasten URL is not a valid URL: %s", err)
+		return fmt.Errorf("leierkasten URL is not valid: %s", err)
 	}
 
 	if parsedUrl.Scheme != "http" && parsedUrl.Scheme != "https" {
