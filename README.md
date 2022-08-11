@@ -2,7 +2,10 @@
 An HTTP authentication provider for caddyserver using the Leierkasten as authentication backend.
 
 ## Build
-Simply build with `xcaddy build --with github.com/kdf-leierkasten/caddy_leierkasten_auth`
+Simply build with [xcaddy](https://github.com/caddyserver/xcaddy):
+```
+xcaddy build --with github.com/kdf-leierkasten/caddy_leierkasten_auth
+```
 
 ## Sample Caddyfile
 Two values are necessary:
