@@ -132,6 +132,8 @@ func (leierkastenAuth *LeierkastenAuth) Authenticate(_ http.ResponseWriter, requ
 	}
 
 	request.AddCookie(authCookie)
+	request.Header.Set("User-Agent", "Caddy Leierkasten Authentication Agent")
+
 	client := &http.Client{}
 	response, err := client.Do(request)
 	if err != nil {
