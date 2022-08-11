@@ -123,7 +123,7 @@ func (leierkastenAuth *LeierkastenAuth) Authenticate(_ http.ResponseWriter, requ
 		return failureUser, false, fmt.Errorf("the leierkasten auth cookie was not provided with the request")
 	}
 
-	requestContext, cancel := context.WithTimeout(context.Background(), 10*time.Millisecond)
+	requestContext, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	defer cancel()
 
 	request, err := http.NewRequestWithContext(requestContext, "GET", fmt.Sprintf("%s/me/get", leierkastenAuth.LeierkastenUrl), nil)
