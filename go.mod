@@ -3,7 +3,7 @@ module github.com/kdf-leierkasten/caddy_leierkasten_auth
 go 1.19
 
 require (
-	github.com/caddyserver/caddy/v2 v2.6.4
+	github.com/caddyserver/caddy/v2 v2.6.3
 	go.uber.org/zap v1.24.0
 )
 
