@@ -1,4 +1,4 @@
-module github.com/kdf-leierkasten/caddy_leierkasten_auth
+module github.com/poettig/caddy_leierkasten_auth
 
 go 1.19
 
